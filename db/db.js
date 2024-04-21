@@ -1,6 +1,8 @@
 const { Sequelize } = require('sequelize');
+const mysql = require('mysql2/promise');
 const dotenv = require("dotenv");
 dotenv.config()
+
 
 const sequelize = new Sequelize(
     process.env.DB_DATABASE,
@@ -12,5 +14,6 @@ const sequelize = new Sequelize(
     });
 
 sequelize.sync()
+
 
 module.exports = sequelize;

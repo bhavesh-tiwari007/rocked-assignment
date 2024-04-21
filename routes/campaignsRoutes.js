@@ -1,7 +1,7 @@
-const { getCampaigns } = require('../service/campaignServices');
+const { getCampaignsController } = require('../controller/campaignController');
 const router = require('express').Router();
 
-router.get('/campaigns', getCampaigns);
+router.get('/campaigns', getCampaignsController);
 
 
 module.exports = router;

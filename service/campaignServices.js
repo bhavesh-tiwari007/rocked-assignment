@@ -1,4 +1,4 @@
-const Campaign = require('../model/campaignModel');
+const sequelize = require('../db/db');
 
 
 async function createCampaign(req, res) {
@@ -10,13 +10,10 @@ async function createCampaign(req, res) {
     }
 }   
 
-async function getCampaigns(req, res) {
+const getCampaigns = async () => {
     try {
-        const campaigns = await Campaign.findAll();
-        if (!campaigns) {
-            return res.status(404).json({ message: 'Campaigns not found' });
-        }
-        res.status(200).json(campaigns);
+        const campaigns = await sequelize.query("SELECT * FROM rpt_campaigns;");
+        return campaigns;
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

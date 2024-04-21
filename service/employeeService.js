@@ -1,4 +1,4 @@
-const Employee = require('../model/employeeModel');
+const sequelize = require('../db/db');  
 
 async function createEmployee(req, res) {
     try {
@@ -18,14 +18,10 @@ async function getEmployees(req, res) {
     }
 }
 
-async function getEmployeesByDealershipId(req, res) {
+const getEmployeesByDealershipId = async (dealershipId) => {
     try {
-        const employees = await Employee.findAll({
-            where: {
-                dealershipId: req.params.dealershipId
-            }
-        });
-        res.status(200).json(employees);
+        const employees = await sequelize.query(`SELECT * FROM rpt_employees WHERE dealership_id = ${dealershipId};`);
+        return employees;
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

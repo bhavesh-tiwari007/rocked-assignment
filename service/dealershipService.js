@@ -1,4 +1,4 @@
-const Dealership = require('../model/dealershipModel');
+const sequelize = require('../db/db');
 
 
 async function createDealership(req, res) {
@@ -10,10 +10,10 @@ async function createDealership(req, res) {
     }
 }
 
-async function getDealerships(req, res) {
+const getDealerships = async () => {
     try {
-        const dealerships = await Dealership.findAll();
-        res.status(200).json(dealerships);
+        const dealerships = await sequelize.query("SELECT * FROM rpt_dealerships;");
+        return dealerships;
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

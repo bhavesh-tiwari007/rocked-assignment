@@ -1,4 +1,4 @@
-const Topic = require('../model/topicsModel');
+const sequelize = require('../db/db');
 
 async function createTopic(req, res) {
     try {
@@ -18,14 +18,10 @@ async function getTopics(req, res) {
     }
 }
 
-async function getTopicsByCampaignId(req, res) {
+const getTopicsByCampaignId = async (campaignId) => {
     try {
-        const topics = await Topic.findAll({
-            where: {
-                campaignId: req.params.campaignId
-            }
-        });
-        res.status(200).json(topics);
+        const topics = await sequelize.query(`SELECT * FROM rpt_topics WHERE campaign_id = ${campaignId};`);
+        return topics;
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

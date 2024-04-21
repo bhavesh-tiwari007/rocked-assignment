@@ -1,9 +1,9 @@
 const Roster = require('../model/rosterModel');
 
 
-async function createRosterToDb({title, campaign, topics, dealer, training_data, status, attendees}) {
+async function createRosterToDb({title, campaign, topics, dealer, training_data, status, attendees, trainer_id}) {
     try {
-        const roster = await Roster.create({title, campaign, topics, dealer, training_data, status, attendees});
+        const roster = await Roster.create({title, campaign, topics, dealer, training_data, status, attendees, trainer_id});
         res.status(201).json(roster);
     } catch (error) {
         res.status(500).json({ message: error.message });

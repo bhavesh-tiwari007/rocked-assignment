@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
-const { getEmployeesByDealershipId } = require('../service/employeeService');
+const { getEmployeesByDealershipIdController } = require('../controller/employeeController');
 
-router.get('/employees/:dealershipId', getEmployeesByDealershipId);
+router.get('/employees/:dealershipId', getEmployeesByDealershipIdController);
 
 module.exports = router;
